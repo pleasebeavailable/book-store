@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "username": "username1",
+    "loyaltyPoints": 5
+  },
+  {
+    "id": 2,
+    "username": "username2",
+    "loyaltyPoints": 13
+  },
+  {
+    "id": 3,
+    "username": "username4",
+    "loyaltyPoints": 8
+  }
+]
