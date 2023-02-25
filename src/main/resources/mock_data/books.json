@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "name": "name1",
+    "price": 5.50,
+    "bookType": "NEW_RELEASE"
+  },
+  {
+    "id": 2,
+    "name": "name2",
+    "price": 6.50,
+    "bookType": "NEW_RELEASE"
+  },
+  {
+    "id": 3,
+    "name": "name3",
+    "price": 3.50,
+    "bookType": "NEW_RELEASE"
+  },
+  {
+    "id": 14,
+    "name": "name4",
+    "price": 8.50,
+    "bookType": "REGULAR"
+  },
+  {
+    "id": 5,
+    "name": "name5",
+    "price": 6.20,
+    "bookType": "REGULAR"
+  },
+  {
+    "id": 6,
+    "name": "name6",
+    "price": 4.50,
+    "bookType": "REGULAR"
+  },
+  {
+    "id": 7,
+    "name": "name7",
+    "price": 7.50,
+    "bookType": "OLD_EDITION"
+  },
+  {
+    "id": 8,
+    "name": "name8",
+    "price": 5.50,
+    "bookType": "OLD_EDITION"
+  },
+  {
+    "id": 9,
+    "name": "name9",
+    "price": 9.50,
+    "bookType": "OLD_EDITION"
+  }
+]
