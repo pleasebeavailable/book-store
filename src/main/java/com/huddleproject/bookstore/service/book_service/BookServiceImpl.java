@@ -1,22 +1,39 @@
 package com.huddleproject.bookstore.service.book_service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.huddleproject.bookstore.mapper.Mapper;
 import com.huddleproject.bookstore.model.Book;
-import com.huddleproject.bookstore.utils.HelperClass;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.huddleproject.bookstore.util.UtilsClass;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+import java.util.List;
+import java.util.Objects;
 
 @Service
 public class BookServiceImpl implements BookService {
-  @Autowired
-  private HelperClass helperClass;
-  private static final Logger LOGGER = LoggerFactory.getLogger(BookServiceImpl.class);
+
+  @Value("${mock_data.books}")
+  private String books_path;
 
   public Flux<Book> findAllBooks() {
-    String booksJsonArrayAsString = helperClass.readJsonFromPath("src/main/resources/mock_data/books.json");
+    String booksJsonArrayAsString = UtilsClass.readJsonFromClasspath(books_path);
 
-    return helperClass.mapJsonToFlux(booksJsonArrayAsString);
+    return getBookFlux(booksJsonArrayAsString);
   }
+
+  @Override
+  public Mono<Book> findABook(final Long id) {
+    String booksJsonArrayAsString = UtilsClass.readJsonFromClasspath(books_path);
+
+    return getBookFlux(booksJsonArrayAsString).filter((Book book) -> Objects.equals(book.getId(), id)).next();
+  }
+
+  private Flux<Book> getBookFlux(final String booksJsonArrayAsString) {
+    return Mapper.mapJsonToListOfObjects(booksJsonArrayAsString, new TypeReference<List<Book>>() {
+    });
+  }
+
 }

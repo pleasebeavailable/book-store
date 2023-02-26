@@ -12,11 +12,13 @@ import java.util.List;
 
 public class Mapper {
   private static final Logger LOGGER = LoggerFactory.getLogger(Mapper.class);
+  static ObjectMapper objectMapper = new ObjectMapper();
 
   public static <T> Flux<T> mapJsonToListOfObjects(String jsonArrayAsString, TypeReference<List<T>> valueTypeRef) {
-    ObjectMapper objectMapper = new ObjectMapper();
     List<T> mappedList = new ArrayList<>();
     try {
+      LOGGER.info("Mapping books from JSON!");
+
       mappedList = objectMapper.readValue(jsonArrayAsString, valueTypeRef);
     } catch (
         IOException e) {
