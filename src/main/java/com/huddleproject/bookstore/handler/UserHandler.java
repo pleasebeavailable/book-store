@@ -1,7 +1,7 @@
 package com.huddleproject.bookstore.handler;
 
 import com.huddleproject.bookstore.model.User;
-import com.huddleproject.bookstore.service.book_service.UserService;
+import com.huddleproject.bookstore.service.user_service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;

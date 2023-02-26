@@ -1,4 +1,4 @@
-package com.huddleproject.bookstore.service.book_service;
+package com.huddleproject.bookstore.service.user_service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.huddleproject.bookstore.mapper.Mapper;
