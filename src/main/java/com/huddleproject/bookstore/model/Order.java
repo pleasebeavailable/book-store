@@ -15,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Order {
+  private Long id;
   private List<Book> orderedBooks;
   private BigDecimal basePrice;
   private String username;
