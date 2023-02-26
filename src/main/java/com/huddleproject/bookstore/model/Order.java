@@ -17,5 +17,6 @@ import java.util.List;
 public class Order {
   private List<Book> orderedBooks;
   private BigDecimal basePrice;
+  private String username;
   private boolean withLoyaltyPoints;
 }
