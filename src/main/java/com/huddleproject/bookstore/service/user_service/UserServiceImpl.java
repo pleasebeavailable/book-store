@@ -28,10 +28,15 @@ public class UserServiceImpl implements UserService {
   }
 
   /**
-   * This method is mocked because there is no database
+   * This method only returns user because there is no database
    */
   @Override public Mono<User> saveUser(final User user) {
-    LOGGER.info("Saving user!");
+    try {
+      LOGGER.info("Save user!");
+
+    } catch (Exception e) {
+      LOGGER.error("Error on save user: " + e.getLocalizedMessage());
+    }
     return Mono.just(user);
   }
 
@@ -42,7 +47,7 @@ public class UserServiceImpl implements UserService {
         .doOnNext((User user) -> LOGGER.info("Before change: " + user.getLoyaltyPoints()))
         .map((User user) -> addLoyaltyAndReturnUser(user, isAward))
         .doOnNext((User user) -> LOGGER.info("Loyalty changed: " + user.getLoyaltyPoints()))
-        .doOnNext(this::saveUser);
+        .flatMap(this::saveUser);
   }
 
   private Flux<User> getUserFlux(final String usersJsonArrayAsString) {

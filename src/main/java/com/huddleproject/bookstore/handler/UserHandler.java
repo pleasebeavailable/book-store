@@ -17,10 +17,11 @@ public class UserHandler {
   public Mono<ServerResponse> findUser(ServerRequest request) {
     String username = request.pathVariable("username");
 
-    Mono<User> user = userServiceImpl.findUser(username);
+    Mono<User> userMono = userServiceImpl.findUser(username);
     return ServerResponse.ok()
         .contentType(MediaType.APPLICATION_JSON)
-        .body(user, User.class);
+        .body(userMono, User.class)
+        .switchIfEmpty(ServerResponse.notFound().build());
   }
 
 }

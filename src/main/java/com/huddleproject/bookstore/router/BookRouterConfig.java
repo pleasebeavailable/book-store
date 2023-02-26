@@ -19,7 +19,7 @@ public class BookRouterConfig {
   RouterFunction<ServerResponse> routes() {
     return route()
         .GET("/books/all", handler::findAllBooks)
-        .GET("/books/{id}", handler::findABook)
+        .GET("/books/{id}", handler::findBook)
         .build();
   }
 }

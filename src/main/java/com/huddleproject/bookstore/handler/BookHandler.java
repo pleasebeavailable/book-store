@@ -16,18 +16,19 @@ public class BookHandler {
   BookService bookServiceImpl;
 
   public Mono<ServerResponse> findAllBooks(ServerRequest request) {
-    Flux<Book> books = bookServiceImpl.findAllBooks();
+    Flux<Book> bookFlux = bookServiceImpl.findAllBooks();
     return ServerResponse.ok()
         .contentType(MediaType.APPLICATION_JSON)
-        .body(books, Book.class);
+        .body(bookFlux, Book.class)
+        .switchIfEmpty(ServerResponse.notFound().build());
   }
 
-  public Mono<ServerResponse> findABook(ServerRequest request) {
+  public Mono<ServerResponse> findBook(ServerRequest request) {
     Long id = Long.valueOf(request.pathVariable("id"));
 
-    Mono<Book> book = bookServiceImpl.findBook(id);
+    Mono<Book> bookMono = bookServiceImpl.findBook(id);
     return ServerResponse.ok()
         .contentType(MediaType.APPLICATION_JSON)
-        .body(book, Book.class);
+        .body(bookMono, Book.class);
   }
 }
