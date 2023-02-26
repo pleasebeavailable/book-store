@@ -1,0 +1,4 @@
+mock_data:
+  books: "mock_data/books.json"
+  users: "mock_data/users.json"
+  orders: "mock_data/orders.json"
