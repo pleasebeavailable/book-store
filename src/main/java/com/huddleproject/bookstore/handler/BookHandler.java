@@ -25,7 +25,7 @@ public class BookHandler {
   public Mono<ServerResponse> findABook(ServerRequest request) {
     Long id = Long.valueOf(request.pathVariable("id"));
 
-    Mono<Book> book = bookServiceImpl.findABook(id);
+    Mono<Book> book = bookServiceImpl.findBook(id);
     return ServerResponse.ok()
         .contentType(MediaType.APPLICATION_JSON)
         .body(book, Book.class);

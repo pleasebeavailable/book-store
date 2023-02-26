@@ -8,5 +8,5 @@ public interface BookService {
 
   Flux<Book> findAllBooks();
 
-  Mono<Book> findABook(Long id);
+  Mono<Book> findBook(Long id);
 }

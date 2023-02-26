@@ -25,7 +25,7 @@ public class BookServiceImpl implements BookService {
   }
 
   @Override
-  public Mono<Book> findABook(final Long id) {
+  public Mono<Book> findBook(final Long id) {
     String booksJsonArrayAsString = UtilsClass.readJsonFromClasspath(books_path);
 
     return getBookFlux(booksJsonArrayAsString).filter((Book book) -> Objects.equals(book.getId(), id)).next();
