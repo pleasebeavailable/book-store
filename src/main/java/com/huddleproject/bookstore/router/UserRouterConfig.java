@@ -16,7 +16,7 @@ public class UserRouterConfig {
   private UserHandler handler;
 
   @Bean
-  RouterFunction<ServerResponse> routes() {
+  RouterFunction<ServerResponse> userRoutes() {
     return route()
         .GET("/user/{username}", handler::findUser)
         .build();

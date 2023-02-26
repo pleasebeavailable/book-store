@@ -16,7 +16,7 @@ public class BookRouterConfig {
   private BookHandler handler;
 
   @Bean
-  RouterFunction<ServerResponse> routes() {
+  RouterFunction<ServerResponse> bookRoutes() {
     return route()
         .GET("/books/all", handler::findAllBooks)
         .GET("/books/{id}", handler::findBook)
