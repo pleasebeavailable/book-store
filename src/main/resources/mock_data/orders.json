@@ -1,5 +1,6 @@
 [
   {
+    "username": "username1",
     "orderedBooks": [
       {
         "id": 3,
@@ -30,6 +31,7 @@
     "withLoyaltyPoints": true
   },
   {
+    "username": "username2",
     "orderedBooks": [
       {
         "id": 8,
@@ -48,6 +50,7 @@
     "withLoyaltyPoints": false
   },
   {
+    "username": "username3",
     "orderedBooks": [
       {
         "id": 7,
