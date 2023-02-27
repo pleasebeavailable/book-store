@@ -9,6 +9,10 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 
+
+/**
+ * Helper class for reading json values from mock data
+ * */
 public final class UtilsClass {
   private static final Logger LOGGER = LoggerFactory.getLogger(UtilsClass.class);
 

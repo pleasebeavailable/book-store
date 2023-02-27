@@ -14,6 +14,9 @@ public class UserHandler {
   @Autowired
   UserService userServiceImpl;
 
+  /**
+   * Find user with certain username
+   * */
   public Mono<ServerResponse> findUser(ServerRequest request) {
     String username = request.pathVariable("username");
 
