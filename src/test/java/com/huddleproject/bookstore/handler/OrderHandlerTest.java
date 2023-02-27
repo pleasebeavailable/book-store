@@ -11,9 +11,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @SpringBootTest
 @AutoConfigureWebTestClient
@@ -26,18 +29,24 @@ class OrderHandlerTest {
     String ordersJsonArrayAsString = UtilsClass.readJsonFromClasspath("mock_data/orders.json");
     Flux<Order> orders = getOrderFlux(ordersJsonArrayAsString);
 
-    Flux<Order> executedOrder = webTestClient.post()
-        .uri("/order/execute")
-        .body(orders.next(), Order.class)
-        .accept(MediaType.APPLICATION_JSON)
-        .exchange()
-        .expectStatus().isCreated()
-        .returnResult(Order.class).getResponseBody()
-        .log();
+    List<Mono<Order>> orderList = Objects.requireNonNull(orders.map(Mono::just)
+        .collect(Collectors.toList()).block());
 
-    StepVerifier.create(executedOrder)
-        .expectNextCount(1)
-        .verifyComplete();
+    orderList
+        .forEach((Mono<Order> order) -> {
+          Flux<Order> executedOrder = webTestClient.post()
+              .uri("/order/execute")
+              .body(order, Order.class)
+              .accept(MediaType.APPLICATION_JSON)
+              .exchange()
+              .expectStatus().isCreated()
+              .returnResult(Order.class).getResponseBody();
+
+          StepVerifier.create(executedOrder)
+              .expectNextCount(1)
+              .verifyComplete();
+        });
+
   }
 
   private Flux<Order> getOrderFlux(final String booksJsonArrayAsString) {
