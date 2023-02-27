@@ -20,12 +20,12 @@ public class Mapper {
   public static <T> Flux<T> mapJsonToListOfObjects(String jsonArrayAsString, TypeReference<List<T>> valueTypeRef) {
     List<T> mappedList = new ArrayList<>();
     try {
-      LOGGER.info("Mapping order from JSON!");
+      LOGGER.info("Mapping object from JSON!");
 
       mappedList = objectMapper.readValue(jsonArrayAsString, valueTypeRef);
     } catch (
         IOException e) {
-      LOGGER.error("Error mapping order from JSON string! Error: " + e.getLocalizedMessage());
+      LOGGER.error("Error mapping object from JSON string! Error: " + e.getLocalizedMessage());
     }
 
     return Flux.fromIterable(mappedList);
