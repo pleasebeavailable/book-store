@@ -23,6 +23,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class OrderHandler {
+  static final double OLD_EDITION_BUNDLE = 0.75;
+  static final double OLD_EDITION = 0.8;
+  static final double REGULAR_EDITION_BUNDLE = 0.9;
+
   private static final Logger LOGGER = LoggerFactory.getLogger(OrderHandler.class);
   @Autowired
   private OrderService orderServiceImpl;
@@ -92,7 +96,7 @@ public class OrderHandler {
     return Order.builder()
         .username(order.getUsername())
         .withLoyaltyPoints(order.isWithLoyaltyPoints())
-        .orderedBooks(order.isWithLoyaltyPoints() ? books : order.getOrderedBooks())
+        .orderedBooks(books)
         .basePrice(BigDecimal.ZERO)
         .build();
   }
@@ -118,15 +122,14 @@ public class OrderHandler {
   private BigDecimal calculateBasePrice(Order order) {
     List<Book> books = order.getOrderedBooks();
     boolean isBundle = books.size() >= 3;
-
     return books.stream()
         .map((Book book) ->
             book.getBookType().equals(BookType.OLD_EDITION) ?
                 isBundle ?
-                    book.getPrice().multiply(BigDecimal.valueOf(0.75)) :
-                    book.getPrice().multiply(BigDecimal.valueOf(0.8)) :
+                    book.getPrice().multiply(BigDecimal.valueOf(OLD_EDITION_BUNDLE)) :
+                    book.getPrice().multiply(BigDecimal.valueOf(OLD_EDITION)) :
                 (book.getBookType().equals(BookType.REGULAR) && isBundle) ?
-                    book.getPrice().multiply(BigDecimal.valueOf(0.9)) :
+                    book.getPrice().multiply(BigDecimal.valueOf(REGULAR_EDITION_BUNDLE)) :
                     book.getPrice()
         ).reduce(BigDecimal.ZERO, BigDecimal::add);
 
